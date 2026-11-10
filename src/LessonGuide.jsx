@@ -1,3 +1,4 @@
+// Данные уроков отделены от разметки. map выводит каждый шаг по одному шаблону.
 const lessons = [
   {
     title: 'Функция',
@@ -20,7 +21,9 @@ const lessons = [
   {
     title: 'Сценарий в браузере',
     tool: 'Playwright',
-    description: 'Пройди путь пользователя в Chromium и проверь список после перезагрузки. Перед первым запуском установи браузер командой npx playwright install chromium.',
+    description: 'Chromium — браузер с открытым исходным кодом, на котором основан Google Chrome. ' +
+      'Playwright откроет в нём приложение и проверит список после перезагрузки. ' +
+      'Перед первым запуском скачай браузер командой npx playwright install chromium.',
     command: 'npm run test:e2e',
   },
 ]
@@ -34,6 +37,7 @@ export function LessonGuide() {
       <ol className="lesson-list">
         {lessons.map((lesson, index) => (
           <li key={lesson.title}>
+            {/* details и summary раскрываются средствами HTML. Изначально открыт первый шаг. */}
             <details open={index === 0}>
               <summary>
                 <span className="lesson-number" aria-hidden="true">0{index + 1}</span>

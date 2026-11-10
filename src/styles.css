@@ -1,3 +1,4 @@
+/* Переменные из :root доступны во всём документе. var() подставляет их значения. */
 :root {
   font-family: system-ui, sans-serif;
   color: #18271f;
@@ -32,6 +33,7 @@ button, summary, .task-row {
   cursor: pointer;
 }
 
+/* Контур показывает текущий элемент при навигации с клавиатуры. */
 :focus-visible {
   outline: 3px solid #327052;
   outline-offset: 3px;
@@ -81,6 +83,7 @@ button, summary, .task-row {
 }
 
 .hero {
+  /* clamp(минимум, гибкое значение, максимум) меняет отступ с шириной окна. */
   padding: clamp(24px, 5vw, 58px);
   border-radius: 24px;
   color: var(--paper);
@@ -106,6 +109,7 @@ button, summary, .task-row {
 
 .workspace {
   display: grid;
+  /* fr делит свободное место между колонками. Минимум 0 позволяет им сжиматься. */
   grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
   align-items: start;
   gap: 18px;
@@ -155,6 +159,7 @@ h2 {
 
 .form-controls {
   display: grid;
+  /* Поле занимает оставшееся место, кнопка подстраивается под свой текст. */
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
 }
@@ -225,6 +230,7 @@ h2 {
   background: #edf2e8;
 }
 
+/* Стиль активного фильтра берётся из того же атрибута, который сообщает его состояние. */
 .filters button[aria-pressed="true"] {
   border-color: var(--ink);
   color: white;
@@ -257,6 +263,7 @@ h2 {
   accent-color: var(--green);
 }
 
+/* + выбирает span сразу после отмеченного чекбокса и зачёркивает название. */
 .task-row input:checked + span {
   color: var(--muted);
   text-decoration: line-through;
@@ -299,6 +306,7 @@ h2 {
   display: none;
 }
 
+/* ::after рисует стрелку из двух границ. Атрибут open поворачивает её при раскрытии. */
 .lesson-list summary::after {
   width: 8px;
   height: 8px;
@@ -364,6 +372,7 @@ footer {
   font-size: 0.82rem;
 }
 
+/* На узком экране список и уроки идут друг под другом, ниже 480px кнопка тоже переносится. */
 @media (max-width: 760px) {
   .workspace {
     grid-template-columns: 1fr;

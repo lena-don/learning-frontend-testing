@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+// Директива выше включает DOM для этого файла. Так React может создать элементы формы в Node.js.
 
 import './testSetup.js'
 import { render, screen } from '@testing-library/react'
@@ -8,13 +9,16 @@ import { TaskForm } from './TaskForm.jsx'
 
 describe('TaskForm', () => {
   it('показывает ошибку при отправке пустого поля', async () => {
+    // user-event имитирует действия пользователя. await ждёт окончания клика или ввода.
     const user = userEvent.setup()
-    // vi.fn записывает вызовы. Так можно проверить контракт формы с родителем.
+    // vi.fn заменяет обработчик из App и записывает, вызвала ли его форма и с чем.
     const onAdd = vi.fn()
+    // render монтирует форму в DOM, а screen ищет элементы по всему document.body.
     render(<TaskForm onAdd={onAdd} />)
 
     await user.click(screen.getByRole('button', { name: 'Добавить' }))
 
+    // Проверяем видимый результат и то, что пустое название не ушло в список.
     expect(screen.getByRole('alert')).toHaveTextContent('Введите название задачи.')
     expect(onAdd).not.toHaveBeenCalled()
   })
@@ -29,6 +33,7 @@ describe('TaskForm', () => {
     await user.type(input, '  Прочитать главу  ')
     await user.click(screen.getByRole('button', { name: 'Добавить' }))
 
+    // Ожидаем ровно один вызов с названием без пробелов по краям.
     expect(onAdd).toHaveBeenCalledExactlyOnceWith('Прочитать главу')
     expect(input).toHaveValue('')
   })

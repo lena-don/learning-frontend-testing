@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+// jsdom предоставляет DOM и отдельное хранилище для тестов, которые запускаются в Node.js.
 
 import './testSetup.js'
 import { render, screen } from '@testing-library/react'
@@ -9,18 +10,21 @@ import { STORAGE_KEY } from './taskStorage.js'
 
 describe('Список задач', () => {
   beforeEach(() => {
-    // У новых версий Node.js есть свой localStorage. Здесь используем хранилище jsdom.
+    // Vitest предоставляет jsdom.window. stubGlobal подставляет его хранилище,
+    // чтобы тест и App обращались к одному объекту даже в Node.js со своим localStorage.
     vi.stubGlobal('localStorage', jsdom.window.localStorage)
     // Пустой список в хранилище даёт одинаковую отправную точку каждому тесту.
     localStorage.setItem(STORAGE_KEY, '[]')
   })
 
   afterEach(() => {
+    // Возвращаем исходное глобальное значение после каждого теста.
     vi.unstubAllGlobals()
   })
 
   it('связывает форму, список, фильтр и счётчик', async () => {
     const user = userEvent.setup()
+    // Монтируем весь App. Его собственный обработчик соединяет форму со списком.
     render(<App />)
 
     const title = 'Проверить фильтры'
@@ -32,7 +36,7 @@ describe('Список задач', () => {
     expect(screen.getByRole('status')).toHaveTextContent('Выполнено 1 из 1')
 
     await user.click(screen.getByRole('button', { name: 'Активные' }))
-    // queryByRole вернёт null, если задача исчезла из видимого списка.
+    // queryByRole вернёт null при отсутствии элемента. getByRole здесь выбросил бы ошибку.
     expect(screen.queryByRole('checkbox', { name: title })).not.toBeInTheDocument()
     expect(screen.getByText('Активных задач нет.')).toBeInTheDocument()
 
@@ -41,6 +45,7 @@ describe('Список задач', () => {
   })
 
   it('показывает задачи из хранилища при открытии', () => {
+    // Заполняем хранилище до render, потому что App читает его при инициализации.
     localStorage.setItem(STORAGE_KEY, JSON.stringify([
       { id: 'saved-1', title: 'Продолжить обучение', completed: true },
     ]))
