@@ -1,0 +1,381 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #18271f;
+  background: #eef1e9;
+  font-synthesis: none;
+  --paper: #fcfdf8;
+  --ink: #18271f;
+  --muted: #516057;
+  --line: #d9dfd4;
+  --green: #285642;
+  --lime: #d8ef9c;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  line-height: 1.5;
+}
+
+h1, h2, p {
+  margin: 0;
+}
+
+button, input {
+  font: inherit;
+}
+
+button, summary, .task-row {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid #327052;
+  outline-offset: 3px;
+}
+
+.shell {
+  width: min(1100px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.masthead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-block: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 750;
+}
+
+.brand-mark {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 10px;
+  color: var(--lime);
+  background: var(--ink);
+}
+
+.edition, .eyebrow {
+  font-family: ui-monospace, monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.edition {
+  color: var(--muted);
+}
+
+.hero {
+  padding: clamp(24px, 5vw, 58px);
+  border-radius: 24px;
+  color: var(--paper);
+  background: radial-gradient(ellipse at 98% 100%, #365d46, transparent 62%), #182d25;
+}
+
+.hero .eyebrow {
+  color: var(--lime);
+}
+
+.hero h1 {
+  margin-block: 8px 12px;
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.hero p:last-child {
+  max-width: 56ch;
+  color: #dfe9de;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.board, .lesson-guide {
+  padding: clamp(18px, 3vw, 30px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--paper);
+}
+
+.board-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+h2 {
+  font-size: 1.45rem;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.progress {
+  padding: 4px 12px;
+  border-radius: 999px;
+  color: #254436;
+  background: #e1ecd9;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.task-form {
+  margin-block: 24px 20px;
+}
+
+.task-form label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 0.89rem;
+  font-weight: 700;
+}
+
+.form-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+
+.form-controls input, .primary-button {
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+
+.form-controls input {
+  min-width: 0;
+  color: var(--ink);
+  background: #fff;
+}
+
+.form-controls input::placeholder {
+  color: #606e64;
+}
+
+.form-controls [aria-invalid="true"] {
+  border-color: #a63431;
+}
+
+.primary-button {
+  border-color: var(--green);
+  color: #fff;
+  background: var(--green);
+  font-weight: 700;
+}
+
+.primary-button:hover {
+  background: #204634;
+}
+
+.form-hint, .form-error {
+  margin-top: 6px;
+  font-size: 0.82rem;
+}
+
+.form-hint, .guide-intro, .lesson-body, footer {
+  color: var(--muted);
+}
+
+.form-error {
+  color: #a63431;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.filters button {
+  min-height: 36px;
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: transparent;
+  font-size: 0.85rem;
+}
+
+.filters button:hover {
+  background: #edf2e8;
+}
+
+.filters button[aria-pressed="true"] {
+  border-color: var(--ink);
+  color: white;
+  background: var(--ink);
+}
+
+.task-list, .lesson-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.task-list li {
+  border-top: 1px solid var(--line);
+}
+
+.task-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px 4px;
+  overflow-wrap: anywhere;
+}
+
+.task-row input {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin: 3px 0 0;
+  accent-color: var(--green);
+}
+
+.task-row input:checked + span {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.empty-state {
+  padding: 16px;
+  border: 1px dashed var(--line);
+  border-radius: 10px;
+  color: var(--muted);
+}
+
+.lesson-guide {
+  background: #f5f7ef;
+}
+
+.lesson-guide .eyebrow {
+  margin-bottom: 8px;
+  color: var(--green);
+}
+
+.guide-intro {
+  margin-block: 9px 18px;
+  font-size: 0.88rem;
+}
+
+.lesson-list li {
+  border-top: 1px solid var(--line);
+}
+
+.lesson-list summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 11px;
+  list-style: none;
+}
+
+.lesson-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.lesson-list summary::after {
+  width: 8px;
+  height: 8px;
+  margin-left: auto;
+  margin-right: 5px;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  content: '';
+  transform: rotate(45deg);
+}
+
+.lesson-list details[open] summary::after {
+  transform: rotate(225deg);
+}
+
+.lesson-number {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 8px;
+  color: var(--green);
+  background: #e7eddf;
+  font-family: ui-monospace, monospace;
+  font-size: 0.78rem;
+}
+
+details[open] .lesson-number {
+  background: var(--lime);
+}
+
+.lesson-label strong, .lesson-label small {
+  display: block;
+}
+
+.lesson-label strong {
+  font-size: 0.88rem;
+}
+
+.lesson-label small {
+  color: var(--muted);
+}
+
+.lesson-body {
+  padding: 0 0 12px 42px;
+  font-size: 0.84rem;
+}
+
+.lesson-body code {
+  display: block;
+  font-variant-ligatures: none;
+  margin-top: 8px;
+  padding: 7px 9px;
+  border-radius: 6px;
+  color: var(--ink);
+  background: #e9ede2;
+  overflow-wrap: anywhere;
+}
+
+footer {
+  padding-block: 20px 28px;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 760px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .shell {
+    width: calc(100% - 28px);
+  }
+
+  .form-controls {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
