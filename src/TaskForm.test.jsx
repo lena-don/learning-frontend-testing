@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
-// Директива выше включает DOM для этого файла. Так React может создать элементы формы в Node.js.
+// Директива выше включает jsdom — библиотеку, которая создаёт window и document в Node.js.
+// React добавляет форму в этот DOM в памяти, а тест ищет в нём поле, кнопку и сообщение.
 
 import './testSetup.js'
 import { render, screen } from '@testing-library/react'
